@@ -1,13 +1,17 @@
+//TAG:链表尾插法
+
 #include <stdio.h>
 #include <stdlib.h>
 #include<math.h>
 
+//def节点
 struct ListNode {
      int val;
      struct ListNode *next;
  };
 
-struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
+//def主函数
+ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
     struct ListNode *p1 = l1;
     struct ListNode *p2 = l2;
     long num1 = 0, num2 = 0,i = 1;
@@ -45,8 +49,7 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
     return answer;
 }
 
-//def客户端
-
+//def打印函数
 void printList(struct ListNode *head) {
     while (head) {
         printf("%d ", head->val);
@@ -55,6 +58,7 @@ void printList(struct ListNode *head) {
     printf("\n");
 }
 
+//def客户端
 int main() {
     struct ListNode *l1 = malloc(sizeof(struct ListNode));
     struct ListNode *l2 = malloc(sizeof(struct ListNode));
