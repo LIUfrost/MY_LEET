@@ -1,25 +1,13 @@
-int findMaxConsecutiveOnes(int* nums, int numsSize){
-    int i=0;
-    int maxCount=0;
-    int count = 0;
-    
-    while(i<numsSize){
-        
-        while(i<numsSize && nums[i]!=0){
-            count++;
-            i++;
+char* longestCommonPrefix(char** strs, int strsSize) {
+    char* s0 = strs[0];
+    for (int j = 0; s0[j]; j++) { // 从左到右
+        for (int i = 0; i < strsSize; i++) { // 从上到下
+            if (strs[i][j] != s0[j]) { // 这一列有字母缺失或者不同
+                s0[j] = '\0'; // 0 到 j-1 是公共前缀
+                return s0;
+            }
         }
-        
-        if(maxCount<=count){
-         maxCount = count;   
-        }
-        
-        count = 0;
-        while(i<numsSize && nums[i]==0){
-            i++;
-        }
-        
     }
-    return maxCount;
-    
+    return s0;
 }
+
