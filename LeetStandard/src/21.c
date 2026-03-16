@@ -1,72 +1,29 @@
-/*
- * Iterative approach
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
  */
-struct ListNode *mergeTwoLists(struct ListNode *l1, struct ListNode *l2)
-{
-    struct ListNode *list = NULL;
-    struct ListNode *tmp = NULL;
-
-    if (!l1)
-        return l2;
-    if (!l2)
-        return l1;
-
-    if (l1 && l2)
-    {
-        if (l1->val < l2->val)
-        {
-            list = tmp = l1;
-            l1 = l1->next;
+struct ListNode {
+    int val;
+    struct ListNode *next;
+};
+struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
+    struct ListNode *list3=(struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode *p=list3;
+    while(list1 !=NULL && list2 != NULL){
+        if(list1->val <= list2->val){
+            p->next=list1;
+            list1=list1->next;
+        }else{
+            p->next=list2;
+            list2=list2->next;
         }
-        else
-        {
-            list = tmp = l2;
-            l2 = l2->next;
-        }
-
-        while (l1 && l2)
-        {
-            if (l1->val < l2->val)
-            {
-                tmp->next = l1;
-                l1 = l1->next;
-            }
-            else
-            {
-                tmp->next = l2;
-                l2 = l2->next;
-            }
-            tmp = tmp->next;
-        }
-
-        if (l1)
-            tmp->next = l1;
-        if (l2)
-            tmp->next = l2;
-
-        return list;
+        p=p->next;
     }
-
-    return NULL;
-}
-
-/*
- * Recursive approach
- */
-struct ListNode *mergeTwoLists(struct ListNode *l1, struct ListNode *l2)
-{
-    if (!l1)
-        return l2;
-    if (!l2)
-        return l1;
-    if (l1->val < l2->val)
-    {
-        l1->next = mergeTwoLists(l1->next, l2);
-        return l1;
-    }
-    else
-    {
-        l2->next = mergeTwoLists(l1, l2->next);
-        return l2;
-    }
+    p->next=list1!=NULL?list1:list2;
+    struct ListNode *result=list3->next;
+    free(list3);
+    return result;
 }
